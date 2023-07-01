@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { ImageModal } from "./components/ImageModal";
+import { useState, useRef } from "react";
+import { ImageModal } from "./components/ImageModal/index.jsx";
 import "./styles.css";
 
 const URL =
@@ -43,7 +43,7 @@ export function App(props) {
     );
   };
   const getObjectURL = (file) => {
-    if (window.URL && window.URL.createObjectURL) {
+    if (window.URL && window.URL.createObjectURL && file) {
       return window.URL.createObjectURL(file);
     } else {
       return "";
@@ -80,20 +80,20 @@ export function App(props) {
         <>
           <ul className="preview-container">
             {Array.from(files).map((item, index) => (
-              <button
-                style={{
-                  all: "unset"
-                }}
-                onClick={() => {
-                  setImageToEdit(index);
-                  setShowModal(true);
-                }}
-              >
-                <li key={index}>
+              <li key={index}>
+                <button
+                  style={{
+                    all: "unset",
+                  }}
+                  onClick={() => {
+                    setImageToEdit(index);
+                    setShowModal(true);
+                  }}
+                >
                   <img src={getObjectURL(item)} alt={item.name} />{" "}
-                  <button onClick={() => handleRemoveImg(index)}>X</button>
-                </li>
-              </button>
+                </button>
+                <button onClick={() => handleRemoveImg(index)}>X</button>
+              </li>
             ))}
           </ul>
           <div className="action-container">

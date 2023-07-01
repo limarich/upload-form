@@ -1,7 +1,7 @@
 import "./styles.css";
 export const ImageModal = ({ showModal, onClose, files, imageToEdit }) => {
   const getObjectURL = (file) => {
-    if (window.URL && window.URL.createObjectURL) {
+    if (window.URL && window.URL.createObjectURL && file) {
       return window.URL.createObjectURL(file);
     } else {
       return "";
@@ -20,7 +20,7 @@ export const ImageModal = ({ showModal, onClose, files, imageToEdit }) => {
             <div className="image-container">
               <img
                 src={getObjectURL(files[imageToEdit])}
-                alt={files[imageToEdit].name}
+                alt={files[imageToEdit]?.name || "não informado"}
               />
             </div>
             <div className="input-control">
